@@ -38,7 +38,8 @@ pub fn problem2(filename: &str) {
     }
 
     _elf_calorie_count.sort_by(|a, b| b.cmp(a));
-    let sum: &i32 = &_elf_calorie_count[0..=2].iter().sum();
+    // let sum: &i32 = &_elf_calorie_count[0..=2].iter().sum();
+    let sum: i32 = _elf_calorie_count.iter().take(3).sum();
 
     println!("Max calorie count is : {:?}", sum);
 }
