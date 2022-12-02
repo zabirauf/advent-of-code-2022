@@ -17,6 +17,9 @@ pub fn problem1(filename: &str) {
         }
     }
 
+    // For final elf
+    _max_calorie_count = _max_calorie_count.max(_current_calorie_count);
+
     println!("Max calorie count is : {}", _max_calorie_count);
 }
 
@@ -36,6 +39,9 @@ pub fn problem2(filename: &str) {
             }
         }
     }
+
+    // For final elf
+    _elf_calorie_count.push(_current_calorie_count);
 
     _elf_calorie_count.sort_by(|a, b| b.cmp(a));
     // let sum: &i32 = &_elf_calorie_count[0..=2].iter().sum();
