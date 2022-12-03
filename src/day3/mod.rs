@@ -90,8 +90,8 @@ fn find_duplicate_char_in_group(strs: [&str; 3]) -> Option<char> {
     loop {
         let mut is_all_same = true;
         for i in 1..total_indexes {
-            let curr_index: usize = indexes[i].try_into().unwrap();
-            let prev_index: usize = indexes[i-1].try_into().unwrap();
+            let curr_index: usize = indexes[i];
+            let prev_index: usize = indexes[i-1];
 
             // println!("LSize: {}:{}[{}], RSize: {}:{}[{}]", i-1, strs[i-1].len(), prevIndex, i, strs[i].len(), currIndex);
             let curr_char = c_strs[i].get(curr_index);
@@ -105,7 +105,7 @@ fn find_duplicate_char_in_group(strs: [&str; 3]) -> Option<char> {
         }
 
         if is_all_same {
-            let first_index: usize = indexes[0].try_into().unwrap();
+            let first_index: usize = indexes[0];
             let curr_char = c_strs[0].get(first_index).unwrap();
             return Some(curr_char.clone());
         }
