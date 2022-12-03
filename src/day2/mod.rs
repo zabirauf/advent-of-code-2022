@@ -30,8 +30,8 @@ pub fn problem2(filename: &str) {
     for line in file_contents.lines() {
         let mut char_line = line.chars();
         let (opponent_move, outcome) = (
-            char_line.nth(0).expect("Error char 0") as u32 - 'A' as u32, 
-            char_line.nth(1).expect("Error char 2") as u32 - 'X' as u32
+            char_line[0] as u32 - 'A' as u32, 
+            char_line[2] as u32 - 'X' as u32
         );
 
         let score = match outcome {
