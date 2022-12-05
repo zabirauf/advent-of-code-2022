@@ -1,5 +1,5 @@
-mod day4;
+mod day5;
 
 fn main() {
-    day4::problem2("./inputs/day4-input.txt");
+    day5::problem1("./inputs/day5-input.txt");
 }
