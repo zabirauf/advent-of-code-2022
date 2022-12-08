@@ -105,21 +105,29 @@ fn calculate_size_matching_criteria(root: Rc<RefCell<Item>>, current_matched_siz
     let mut _sub_size = 0u32;
 
     for child in cln.borrow().children.iter() {
-        let b_child = child.borrow();
-        match b_child.item_type {
-            ItemType::File => {
-                _sub_size += b_child.total_size;
-            },
-            ItemType::Dir => {
-                let (updated_current_matched_size, directory_size) = calculate_size_matching_criteria(Rc::clone(child), _current_matched_size);
-                _current_matched_size = updated_current_matched_size;
-                _sub_size += directory_size;
+        let mut _directory_size = None;
+        {
+            let b_child = child.borrow();
+            match b_child.item_type {
+                ItemType::File => {
+                    _sub_size += b_child.total_size;
+                },
+                ItemType::Dir => {
+                    let (updated_current_matched_size, directory_size) = calculate_size_matching_criteria(Rc::clone(child), _current_matched_size);
+                    _current_matched_size = updated_current_matched_size;
+                    _sub_size += directory_size;
 
-                if directory_size <= at_most_size {
-                    _current_matched_size += directory_size;
+                    if directory_size <= at_most_size {
+                        _current_matched_size += directory_size;
+                    }
+                    println!("{}", b_child.name);
+                    _directory_size = Some(directory_size);
                 }
-                child.borrow_mut().total_size = directory_size;
             }
+        }
+
+        if let Some(total_size) = _directory_size {
+            child.borrow_mut().total_size = total_size;
         }
     }
 
